@@ -6,6 +6,16 @@
   <title>Tailor's Studio</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox').style.display = 'flex';
+  document.getElementById('lightbox-img').src = src;
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+</script>
+
 <body>
   <!-- __define-ocg__: base layout -->
   <header>
@@ -18,15 +28,18 @@
     <p>Welcome to Tailor’s Studio, where precision meets style. Every stitch tells a story.</p>
   </section>
 
-  <section id="gallery">
-    <h2>Gallery</h2>
-    <div class="gallery-grid">
-      <img src="images/sample1.jpg" alt="Tailored suit">
-      <img src="images/sample2.jpg" alt="Traditional wear">
-      <img src="images/sample3.jpg" alt="Wedding attire">
-      <img src="images/sample4.jpg" alt="Casual outfit">
-    </div>
-  </section>
+  <section id="gallery-section">
+  <h2>Our Work</h2>
+  <div id="gallery" class="gallery-grid">
+    <!-- Images will be auto-inserted here -->
+  </div>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Expanded view"/>
+  </div>
+</section>
+
 
   <section id="contact">
     <h2>Contact</h2>
