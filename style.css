@@ -23,23 +23,46 @@ h2 {
   margin-bottom: 1rem;
 }
 
+/* __define-ocg__ Lightbox and gallery styling */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 15px;
+  padding: 10px;
 }
 
 .gallery-grid img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
   border-radius: 10px;
-  transition: transform 0.2s;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .gallery-grid img:hover {
   transform: scale(1.05);
 }
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  padding: 50px;
+  background: rgba(0,0,0,0.9);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+}
+
 
 .whatsapp-btn {
   background-color: #25d366;
