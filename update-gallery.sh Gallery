@@ -1,0 +1,35 @@
+#!/bin/bash
+# __define-ocg__
+# Automatically update gallery section in index.html based on images in /images folder
+
+# Folder variable (as requested)
+varOcg="images"
+
+# Step 1: Check folder exists
+if [ ! -d "$varOcg" ]; then
+  echo "❌ Folder '$varOcg' not found. Run create-image-folder.sh first."
+  exit 1
+fi
+
+# Step 2: Build the gallery HTML dynamically
+gallery_content=""
+for img in "$varOcg"/*.{jpg,jpeg,png,gif}; do
+  # Only include valid image files
+  if [ -f "$img" ]; then
+    gallery_content+="  <img src=\"$img\" alt=\"Tailor work image\" class=\"gallery-img\"/>\n"
+  fi
+done
+
+# Step 3: Replace the content inside <div id="gallery">...</div> in index.html
+awk -v newContent="$gallery_content" '
+  /<div id="gallery">/ {print; print newContent; skip=1; next}
+  /<\/div>/ && skip {skip=0; next}
+  !skip
+' index.html > temp.html && mv temp.html index.html
+
+# Step 4: Commit & push to GitHub
+git add index.html
+git commit -m "Auto-updated gallery with new images"
+git push origin main
+
+echo "✅ Gallery updated successfully and pushed to GitHub."
